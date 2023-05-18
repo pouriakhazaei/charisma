@@ -8,9 +8,7 @@ import {ListItemsProps} from "Interfaces";
 export const ListItems: FC<ListItemsProps> = memo(({id, text}) => {
     const dispatch = useDispatch();
 
-    const onDelete = () => {
-        dispatch(deleteItemFromList(id))
-    };
+    const onDelete = () => dispatch(deleteItemFromList(id));
 
     return (
         <Button onClick={onDelete} variant="contained" style={{borderRadius: 30, margin: 5}}>

@@ -9,9 +9,7 @@ import {setDataToList} from "Redux/AppSlice";
 export const ProductsItems: FC<ProductsItemsProps> = memo(({title, description}) => {
     const dispatch = useDispatch();
 
-    const onClickItem = () => {
-        dispatch(setDataToList({text: title, id: uuidv4()}));
-    };
+    const onClickItem = () => dispatch(setDataToList({text: title, id: uuidv4()}));
 
     return (
         <ListItem onClick={onClickItem} style={{cursor: "pointer"}}>

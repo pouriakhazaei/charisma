@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import {useEffect} from "react";
 
 import {Users, Products, List} from "Components";
+import {AppDispatch} from "Redux/Store";
 import {getData} from "Redux/AppSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -17,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Page = () => {
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch<AppDispatch>();
     
     useEffect(() => {
         dispatch(getData());

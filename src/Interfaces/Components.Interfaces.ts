@@ -3,7 +3,7 @@ export interface InputProps {
 };
 
 export interface ListItemsProps {
-    id: number;
+    id: string | number;
     text: string;
 };
 

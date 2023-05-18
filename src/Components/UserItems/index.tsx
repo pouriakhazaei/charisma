@@ -9,10 +9,8 @@ import {UserItemsProps} from "Interfaces";
 export const UserItems: FC<UserItemsProps> = memo(({email, username}) => {
     const dispatch = useDispatch();
 
-    const onClickItem = () => {
-        dispatch(setDataToList({text: username, id: uuidv4()}));
-    };
-
+    const onClickItem = () => dispatch(setDataToList({text: username, id: uuidv4()}));
+    
     return (
         <ListItem onClick={onClickItem} style={{cursor: "pointer"}}>
             <ListItemAvatar>

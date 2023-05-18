@@ -2,13 +2,7 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit";
 
 import {axios} from "Configs/ApiConfig";
-
-export interface AppState {
-    isLoading: boolean;
-    products: any[];
-    users: any[];
-    list: any[];
-};
+import {AppState, List} from "./Types";
 
 const initialState: AppState = {
     isLoading: true,
@@ -17,17 +11,16 @@ const initialState: AppState = {
     list: []
 };
 
-// const products = axios.get("products");
-// const users = axios.get("users");
+const products = axios.get("products");
+const users = axios.get("users");
 
-export const getData = createAsyncThunk("users", async () => {
+export const getData = createAsyncThunk("appData", async () => {
     try {
-        const products = await axios.get("products");
-        const users = await axios.get("users");
+        const response = await axios.all([products, users]);
         return {
-            products: products.data,
-            users: users.data
-        }
+            products: response[0].data,
+            users: response[1].data
+        };
     } catch (error) {
         console.error(error);
     };
@@ -44,11 +37,11 @@ export const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        setDataToList: (state, action: PayloadAction<any>) => {
+        setDataToList: (state, action: PayloadAction<List>) => {
             state.list.push(action.payload);
         },
-        deleteItemFromList: (state, action: PayloadAction<any>) => {
-            state.list = state.list.filter((item) => item.id !== action.payload)
+        deleteItemFromList: (state, action: PayloadAction<string | number>) => {
+            state.list = state.list.filter((item) => item.id !== action.payload);
         },
         clearList: (state) => {
             state.list = [];
